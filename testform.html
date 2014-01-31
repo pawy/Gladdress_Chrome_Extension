@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<label for="lastname">Last Name label at wrong place</label>
+<input type="text" name="First Name" />
+<input type="text" name="Last Name" />
+
+<input type="text" id="First Name" />
+<div><label>first name</label></div>
+
+<input name="first" />
+<input name="last" id="lastname" />
+
+
+<!-- TEST -->
+<script src="ext/jquery-2.0.3.min.js"></script>
+<script type="text/javascript">
+
+
+    //Containsi Case insensitive
+    jQuery.expr[':'].Containsi = function(a, i, m) {
+        return jQuery(a).text().toUpperCase()
+                .indexOf(m[3].toUpperCase()) >= 0;
+    };
+
+    jQuery.expr[':'].regex = function(elem, index, match) {
+        var matchParams = match[3].split(','),
+                validLabels = /^(data|css):/,
+                attr = {
+                    method: matchParams[0].match(validLabels) ?
+                            matchParams[0].split(':')[0] : 'attr',
+                    property: matchParams.shift().replace(validLabels,'')
+                },
+                regexFlags = 'ig',
+                regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
+        return regex.test(jQuery(elem)[attr.method](attr.property));
+    }
+
+
+    function nextInDOM(_selector, _subject) {
+        var next = getNext(_subject);
+        while(next.length != 0) {
+            var found = searchFor(_selector, next);
+            if(found != null) return found;
+            next = getNext(next);
+        }
+        return null;
+    }
+    function getNext(_subject) {
+        if(_subject.next().length > 0) return _subject.next();
+        return getNext(_subject.parent());
+    }
+    function searchFor(_selector, _subject) {
+        if(_subject.is(_selector)) return _subject;
+        else {
+            var found = null;
+            _subject.children().each(function() {
+                found = searchFor(_selector, $(this));
+                if(found != null) return false;
+            });
+            return found;
+        }
+        return null; // will/should never get here
+    }
+</script>
+</body>
+</html>

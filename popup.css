@@ -1,0 +1,9 @@
+body, input{
+    font-family: verdana;
+    font-size: 16px;
+    width: 600px;
+}
+input
+{
+    border:none !important;
+}
