@@ -8,7 +8,7 @@ $(document).ready(function(){
         var gladId = $(this).attr('data-gladid');
         $.ajax({
             type: 'GET',
-            url: 'https://gladdress.azurewebsites.net/gladdress/' + gladId,
+            url: 'http://gladdress.com/gladdress/' + gladId,
             error: function()
             {
                 setMessage('Error', 'danger');
@@ -68,7 +68,7 @@ function connectToGladdress()
     setMessage('Connecting...','info');
     $.ajax({
         type: 'GET',
-        url: 'https://gladdress.azurewebsites.net/gladid',
+        url: 'http://gladdress.com/gladid',
         error: function()
         {
             setMessage('Error: Connection to service failed', 'danger');
