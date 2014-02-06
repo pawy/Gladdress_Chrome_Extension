@@ -88,7 +88,7 @@ function connectToGladdress()
                 }
                 else
                 {
-                    setMessage('you are not logged in!<br /><a href="https://gladdress.azurewebsites.net" target="_blank">Please click here, login and try again</a>', 'warning');
+                    setMessage('you are not logged in!<br /><a href="http://gladdress.com" target="_blank">Please click here, login and try again</a>', 'warning');
                 }
             }
             catch(e)
