@@ -68,10 +68,10 @@ function connectToGladdress()
     setMessage('Connecting...','info');
     $.ajax({
         type: 'GET',
-        url: 'http://gladdress.com/profiles',
+        url: 'http://gladdress.com/profiles.json',
         error: function()
         {
-            setMessage('Error: Connection to service failed', 'danger');
+            setMessage('Error: Connection to service failed or you have no profiles defined yet', 'danger');
         },
         success: function(response)
         {
@@ -88,7 +88,7 @@ function connectToGladdress()
                 }
                 else
                 {
-                    setMessage('you are not logged in!<br /><a href="http://gladdress.com" target="_blank">Please click here, login and try again</a>', 'warning');
+                    setMessage('you are not logged in!<br /><a href="http://gladdress.com/Account/Login" target="_blank">Please click here, login and try again</a>', 'warning');
                 }
             }
             catch(e)
