@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Gladdress.com",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Auto fill in address fields from Gladdress.com",
 	"browser_action": {
         "default_icon": {
