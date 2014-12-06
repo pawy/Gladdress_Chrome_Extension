@@ -8,7 +8,7 @@ $(document).ready(function(){
         var gladId = $(this).attr('data-gladid');
         $.ajax({
             type: 'GET',
-            url: 'http://gladdress.com/' + gladId + '/details.json',
+            url: 'https://gladdress.azurewebsites.net/' + gladId + '/details.json',
             error: function()
             {
                 setMessage('Error', 'danger');
@@ -78,7 +78,7 @@ function connectToGladdress()
 
             $.ajax({
                 type: 'GET',
-                url: 'http://gladdress.com/profiles.json',
+                url: 'https://gladdress.azurewebsites.net/profiles.json',
                 beforeSend: function(xhr)
                 {
                     xhr.setRequestHeader("Authorization", "Basic " + btoa(options.username + ":" + options.password))
@@ -92,18 +92,10 @@ function connectToGladdress()
                     setMessage('Connected', 'success');
                     try
                     {
-                        console.log(response);
-                        if(response[0].GladId != null)
+                        $.each(response, function(key, value)
                         {
-                            $.each(response, function(key, value)
-                            {
-                                $('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4><p>' + value.GladId + '</p></a>');
-                            });
-                        }
-                        else
-                        {
-                            setMessage('you are not logged in!<br /><a href="http://gladdress.com/Account/Login" target="_blank">Please click here, login and try again</a>', 'warning');
-                        }
+                            $('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4><p>' + value.GladId + '</p></a>');
+                        });
                     }
                     catch(e)
                     {
