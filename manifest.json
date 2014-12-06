@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Gladdress.com",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Auto fill in address fields from Gladdress.com",
 	"browser_action": {
         "default_icon": {
@@ -19,11 +19,12 @@
             "js": ["ext/jquery-2.0.3.min.js","content.js"]
         }
     ],
+    "options_page": "options.html",
 	"background": { 
 		"scripts": ["background.js"] 
 	},
 	"permissions" : [
-		"tabs","http://*/*","https://*/*"
+		"tabs","http://*/*","https://*/*","storage"
 	],
     "icons" : {
         "16" : "icons/icon_016.png",

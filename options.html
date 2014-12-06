@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gladdress Chrome Extension Configuration</title>
+    <link rel="stylesheet" href="ext/bootstrap.min.css">
+</head>
+<body style="width:600px;">
+    <div class="container">
+        <h1 class="well">
+            <img src="icons/icon_048.png" />
+            Gladdress.com <small>Chrome Settings</small>
+        </h1>
+
+        <h3>General Settings</h3>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="email" class="form-control" placeholder="username / email" id="username" required/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" placeholder="password" id="password"/>
+            </div>
+            <hr>
+                <button id="save" class="btn btn-primary">Save Settings</button>
+                <div style="margin-top:5px" id="status" class="alert alert-info"></div>
+        </form>
+        <hr>
+    </div>
+</body>
+
+<script src="ext/jquery-2.0.3.min.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

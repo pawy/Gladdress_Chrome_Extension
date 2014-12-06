@@ -65,38 +65,55 @@ $(document).ready(function(){
 
 function connectToGladdress()
 {
-    setMessage('Connecting...','info');
-    $.ajax({
-        type: 'GET',
-        url: 'http://gladdress.com/profiles.json',
-        error: function()
+    chrome.storage.sync.get('options', function(val) {
+        if(!val.options)
         {
-            setMessage('Error: Connection to service failed or you have no profiles defined yet', 'danger');
-        },
-        success: function(response)
+            document.location = chrome.extension.getURL("options.html");
+        }
+        else
         {
-            setMessage('Connected', 'success');
-            try
-            {
-                console.log(response);
-                if(response[0].GladId != null)
+            var options = val.options;
+
+            setMessage('Connecting...','info');
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://gladdress.com/profiles.json',
+                beforeSend: function(xhr)
                 {
-                    $.each(response, function(key, value)
+                    xhr.setRequestHeader("Authorization", "Basic " + btoa(options.username + ":" + options.password))
+                },
+                error: function()
+                {
+                    setMessage('Error: Connection to service failed or you have no profiles defined yet', 'danger');
+                },
+                success: function(response)
+                {
+                    setMessage('Connected', 'success');
+                    try
                     {
-                        $('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4><p>' + value.GladId + '</p></a>');
-                    });
+                        console.log(response);
+                        if(response[0].GladId != null)
+                        {
+                            $.each(response, function(key, value)
+                            {
+                                $('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4><p>' + value.GladId + '</p></a>');
+                            });
+                        }
+                        else
+                        {
+                            setMessage('you are not logged in!<br /><a href="http://gladdress.com/Account/Login" target="_blank">Please click here, login and try again</a>', 'warning');
+                        }
+                    }
+                    catch(e)
+                    {
+                        setMessage(e.message, 'danger');
+                    }
                 }
-                else
-                {
-                    setMessage('you are not logged in!<br /><a href="http://gladdress.com/Account/Login" target="_blank">Please click here, login and try again</a>', 'warning');
-                }
-            }
-            catch(e)
-            {
-                setMessage(e.message, 'danger');
-            }
+            });
         }
     });
+
 }
 
 function setMessage(message, type)
