@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    $('#explanation').hide();
     connectToGladdress();
 
     $('#content').on('click', 'a.gladid', function()
@@ -94,7 +95,9 @@ function connectToGladdress()
                     {
                         $.each(response, function(key, value)
                         {
-                            $('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4><p>' + value.GladId + '</p></a>');
+                            //$('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4><p>' + value.GladId + '</p></a>');
+                            $('#explanation').show();
+                            $('.profile-list').append('<a href="#" class="gladid list-group-item" data-gladid="'+ value.GladId + '"><h4>' + value.Name + '</h4></a>');
                         });
                     }
                     catch(e)

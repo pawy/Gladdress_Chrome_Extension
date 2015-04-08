@@ -17,7 +17,7 @@ function save_options() {
                 password: $('#password').val()
             };
             chrome.storage.sync.set({'options': options}, function() {
-                $status.html('changes saved!');
+                $status.html('changes saved, click on the icon again!');
                 hideStatus();
             });
         });

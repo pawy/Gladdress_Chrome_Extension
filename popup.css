@@ -2,6 +2,14 @@ body, input{
     font-family: verdana;
     font-size: 16px;
     width: 600px;
+    background: white;
+    color: #373746;
+}
+.well
+{
+    background: #373746;
+    border:none;
+    color:white;
 }
 input
 {
